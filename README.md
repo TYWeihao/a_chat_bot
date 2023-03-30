@@ -1,4 +1,4 @@
-[Image text]!
+[Image text]
 (1.png)
 # VueJS-with-Vite
 

@@ -7,13 +7,13 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   server: {
     host: true,
-    proxy: {
-      '/v1': {
-        target: 'https://api.openai.com/v1/',
-        secure: false,
-        rewrite: path => path.replace(/^\/v1/, '')
-      },
-    }
+    // proxy: {
+    //   '/v1': {
+    //     target: 'https://api.openai.com/v1/',
+    //     secure: false,
+    //     rewrite: path => path.replace(/^\/v1/, '')
+    //   },
+    // }
   },
   plugins: [vue()],
   resolve: {

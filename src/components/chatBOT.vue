@@ -51,7 +51,7 @@ const apiKey = ref('');
 const userInput = ref(null);
 const messages = ref([]);
 const loading = ref(false)
-const setting = ref('在回答最后加上符合回答的emoji')
+const setting = ref(',Add an emoji that matches the answer at the end of the answer')
 const timer = ref()
 const botLoading = ref(null)
 const lastLi = ref(null)
@@ -134,44 +134,15 @@ async function sendMessage () {
     nextTick(() =>
       scrollToBottom()
     )
-    // const configuration = new Configuration({
-    //   apiKey: apiKey.value,
-    // });
-    // const openai = new OpenAIApi(configuration);
-    // const completion = await openai.createChatCompletion({
-    //   model: "gpt-3.5-turbo",
-    //   messages: messages.value,
-    //   max_tokens: 1000,
-    //   temperature: 0.5
-    // }).then(res => {
-
-    //   messages.value.push(res.data.choices[0].message)
-    //   loading.value = false
-    //   nextTick(() =>
-    //     //console.log(lastLi.value)
-    //     scrollToBottom()
-    //   )
-
-
-    //   userInput.value = null
-    // }).catch(error => {
-    //   timer.value = setTimeout(() => {
-    //     messages.value.push({ role: 'error', content: error.message })
-    //     loading.value = false
-    //   }
-    //     , 1000)
-    //   console.log(error)
-    // });
-    axios.post('/v1/chat/completions', {
+    const configuration = new Configuration({
+      apiKey: apiKey.value,
+    });
+    const openai = new OpenAIApi(configuration);
+    const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: messages.value,
       max_tokens: 1000,
       temperature: 0.5
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + apiKey.value
-      }
     }).then(res => {
 
       messages.value.push(res.data.choices[0].message)
@@ -191,6 +162,7 @@ async function sendMessage () {
         , 1000)
       console.log(error)
     });
+
     timer.value = null
   }
 }
